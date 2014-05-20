@@ -1,0 +1,58 @@
+<html>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  margin: 0;
+  background: #111;
+  min-width: 960px;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = Math.max(960, innerWidth),
+    height = Math.max(500, innerHeight);
+var cx = width/2,
+    cy = height/2;
+var amplitude = cy - 50 , period = .01;
+var x = cx,y = cy;
+var i = 0,osc = 0;
+
+var osScope = d3.select("body").append("svg").attr({
+  width: width,
+  height: height
+});
+
+var circle = d3.select("svg").append("circle")
+.attr({
+  cx: x,
+  cy: y,
+  r: 250,
+  fill: "white",
+});
+var eclipse = d3.select("svg").append("circle")
+.attr({
+  cx: x,
+  cy: y,
+  r: 250,
+  fill: "black",
+});
+function render(){
+  i++;
+  osc = Math.floor(amplitude * Math.sin(period*i)+cx);
+  osc2 = Math.floor(amplitude * Math.cos((period + .005)*i)+cx);
+  console.log(osc);
+  circle.attr({"cx": osc});
+  eclipse.attr({"cx": osc2});
+  requestAnimationFrame(render)
+}
+
+requestAnimationFrame(render);
+
+</script>
+</body>
+</html>

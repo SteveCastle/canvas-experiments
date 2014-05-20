@@ -1,0 +1,73 @@
+<html>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+  overflow:hidden;
+}
+
+.axis path {
+  display: none;
+}
+
+.axis line {
+  shape-rendering: crispEdges;
+  stroke: #000;
+}
+
+.axis .minor line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = Math.max(960, innerWidth),
+    height = Math.max(500, innerHeight);
+var cx = width/2,
+    cy = height/2;
+var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    width = width - margin.left - margin.right,
+    height = height - margin.top - margin.bottom;
+
+var viewPort = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+var x = d3.scale.linear()
+  .domain([0,100])
+  .range([0,width]);
+
+var y = d3.scale.linear()
+  .domain([0,100])
+  .range([0,height]);
+
+
+var xAxis = d3.svg.axis()
+  .scale(x);
+
+var yAxis = d3.svg.axis()
+  .scale(y)
+  .orient("right");
+
+
+
+var xAxisGroup = viewPort.append("g")
+  .attr("class", "x axis")
+  .call(xAxis);
+  
+var xAxisGroup = viewPort.append("g")
+  .attr("class", "y axis")
+  .call(yAxis);
+
+</script>
+</body>
+</html>
